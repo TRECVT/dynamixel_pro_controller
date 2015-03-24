@@ -1,5 +1,10 @@
-- name: H54
+- name: H54100
   model_number: 53768
+  cpr: 502000
+  gear_reduction: 502.0
+
+- name: H54200
+  model_number: 54024
   cpr: 502000
   gear_reduction: 502.0
 

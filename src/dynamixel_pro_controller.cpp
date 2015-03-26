@@ -126,6 +126,7 @@ DynamixelProController::DynamixelProController()
         //For every servo, load and verify its information
         for (int i = 0; i < servos.size(); i++)
         {
+            bool enable_default = false;
             dynamixel_info info;
 
             if (!servos[i].getType() == XmlRpc::XmlRpcValue::TypeStruct)
@@ -156,6 +157,11 @@ DynamixelProController::DynamixelProController()
                 info.joint_name = static_cast<std::string>(servos[i]["joint_name"]);
             }
 
+            if (servos[i]["torque_on"].getType() == XmlRpc::XmlRpcValue::TypeBoolean)
+            {
+                enable_default = static_cast<bool>(servos[i]["torque_on"]);
+            }
+
             //Ping the servo to make sure that we can actually connect to it
             // and that it is alive and well on our bus
             if (driver->ping(info.id))
@@ -181,7 +187,8 @@ DynamixelProController::DynamixelProController()
                     dynamixel_status status;
                     status.id = info.id;
                     status.mode = UNKOWN;
-                    status.torque_enabled = false;
+                    driver->setTorqueEnabled(info.id, enable_default);
+                    status.torque_enabled = enable_default;
 
                     id2status[info.id] = status;
                 }

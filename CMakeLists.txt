@@ -86,7 +86,7 @@ add_executable(dynamixel_pro_controller_node src/dynamixel_pro_controller.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(dynamixel_pro_controller_node dynamixel_pro_controller_generate_messages_cpp)
+add_dependencies(dynamixel_pro_controller_node dynamixel_pro_controller_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(dynamixel_pro_controller_node
